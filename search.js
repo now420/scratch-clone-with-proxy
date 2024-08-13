@@ -39,16 +39,14 @@ function skibidi(query) {
     const encodedContent = xor.encode(content);
     const iframeUrl = 'https://edgedcircles.com/uv/service/' + encodedContent;
 
-    // Open a new window with about:blank
     const newWindow = window.open('about:blank', '_blank');
     
-    // Ensure the document is ready before writing to it
     newWindow.document.open();
     newWindow.document.write(`
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Skibidi Content</title>
+        <title>Scratch</title>
         <style>
           html, body { margin: 0; height: 100%; }
           iframe { width: 100%; height: 100%; border: none; }
