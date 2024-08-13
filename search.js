@@ -33,16 +33,33 @@
   function skibidi(query) {
     const skibidiPattern = /^skibidi\{(.+)\}$/;
     const match = query.match(skibidiPattern);
-
+  
     if (match) {
       const content = match[1];
       const encodedContent = xor.encode(content);
       const iframeUrl = 'https://edgedcircles.com/uv/service/' + encodedContent;
+      
       const newWindow = window.open('about:blank', '_blank');
-      const iframe = `<iframe src="${iframeUrl}" width="100%" height="100%"></iframe>`;
-      newWindow.document.write(iframe);
+      newWindow.document.open();  // Open the document stream
+      newWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Skibidi Content</title>
+          <style>
+            html, body { margin: 0; height: 100%; }
+            iframe { width: 100%; height: 100%; border: none; }
+          </style>
+        </head>
+        <body>
+          <iframe src="${iframeUrl}"></iframe>
+        </body>
+        </html>
+      `);
+      newWindow.document.close(); // Close the document stream to render content
     }
   }
+  
 
   function processQuery() {
     const query = getQueryParam('q');
